@@ -6,17 +6,18 @@ function App() {
   const [location,setLocation] = useState("");
 
   function changeLocation() {
-    setLocation(document.querySelector('#location-input'))
+    setLocation(document.querySelector('#location-input').value);
   }
 
-  const handleEnter = function(event){
+  const handleEnter = (event) => {
     if(event.key === "Enter"){
       document.querySelector('#submit-button').click();
     }
   }
 
-  const handleSubmit = function(){
+  const handleSubmit = () => {
     //fetchWeatherInfo(document.querySelector('#location-input').textContent);
+    changeLocation();
   }
 
   return (
@@ -27,7 +28,7 @@ function App() {
           <input id="location-input" type="text" placeholder={location} onKeyDown={handleEnter}></input>
           <button id="submit-button" onClick={handleSubmit}></button>
         </div>
-        <WeatherModule></WeatherModule>
+        <WeatherModule location={location}></WeatherModule>
       </div>
     </div>
   );
