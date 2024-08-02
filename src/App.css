@@ -8,13 +8,13 @@
 
 .App-header {
   background-color: #282c34;
-  height: 70px;
+  height: 30px;
   width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
+  font-size:30px;
   color: white;
   padding: 15px;
   gap: 10px;
@@ -22,6 +22,7 @@
 
 .App-content {
   background-color:rgb(73, 82, 100);
+  background-image:linear-gradient(to right, rgb(145, 193, 227),rgb(8, 109, 181));
   width:100vw;
   height:100px;
   flex-grow:1;
@@ -37,16 +38,17 @@
   justify-content: center;
   align-items: center;
   height: 40px;
-  width:100%;
+  width:70%;
+  margin-bottom: 20px;
 }
 
 #location-input {
   height:100%;
-  width: 60%;
-  font-size: 40px;
+  width: 90%;
+  font-size: 20px;
 }
 
 #submit-button {
   height: 100%;
-  width:100px;
+  width: 10%;
 }
