@@ -1,33 +1,38 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { WeatherModule } from './weatherinfo.js';
+import {fetchWeatherInfo} from './api.js';
 
 function App() {
-  const [location,setLocation] = useState("");
+  const [location,setLocation] = useState(null);
+  const [unknownLocation, setUnknownLocation] = useState("");
 
-  function changeLocation() {
-    setLocation(document.querySelector('#location-input'))
+  async function changeLocation() {
+    let data = await fetchWeatherInfo(document.querySelector('#location-input').value);
+    console.log(data);
+    if(data){
+      setLocation(data);
+    } else {
+      // error message
+      setUnknownLocation(`Unknown location ${document.querySelector('#location-input').value}, please try again`);
+    }
   }
 
-  const handleEnter = function(event){
+  const handleEnter = (event) => {
     if(event.key === "Enter"){
       document.querySelector('#submit-button').click();
     }
   }
 
-  const handleSubmit = function(){
-    //fetchWeatherInfo(document.querySelector('#location-input').textContent);
-  }
-
   return (
     <div className="App">
-      <div className="App-header"><img src="./favicon.ico" alt="icon"></img>Weather</div>
+      <div className="App-header"><img src="./favicon.svg" alt="icon" style={{height:'100%'}}></img>Weather</div>
       <div className="App-content">
         <div className="search-bar">
-          <input id="location-input" type="text" placeholder={location} onKeyDown={handleEnter}></input>
-          <button id="submit-button" onClick={handleSubmit}></button>
+          <input id="location-input" type="text" placeholder="Please enter a location" onKeyDown={handleEnter}></input>
+          <button id="submit-button" onClick={changeLocation}></button>
         </div>
-        <WeatherModule></WeatherModule>
+        {location === null ? <div>{unknownLocation}</div> : <WeatherModule location={location}></WeatherModule>}
       </div>
     </div>
   );
